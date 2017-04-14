@@ -1,11 +1,12 @@
 require 'cooking_process'
 require 'main_character'
 require 'ingredient'
+require 'pan'
 
 describe CookingProcess do
   let(:appliance) { double(:appliance) }
   let(:ingredient) { instance_double(Ingredient) }
-  let(:pan) { double(:pan) }
+  let(:pan) { instance_double(Pan) }
   let(:character_spy) { instance_spy(MainCharacter) }
   let(:process) { described_class.new(appliance, character_spy) }
 
@@ -27,19 +28,32 @@ describe CookingProcess do
     end
   end
 
-  before do
-      allow(character_spy).to receive(:available_items).and_return([])
+  context 'equiptment' do
+
+    it 'can add equiptment' do
+      allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
+
+      process_with_equiptment = process.in([pan])
+
+      expect(process_with_equiptment.equiptment).to eq([pan])
+    end
+
+    it 'cannot use equipment chef does not have' do
+      allow(character_spy).to receive(:available_items).and_return([ingredient])
+
+      process_with_equiptment = process.in([pan])
+
+      expect(process_with_equiptment.equiptment).to be_empty
+    end
   end
 
-  it 'can add equiptment' do
-    process_with_equiptment = process.with([ingredient]).in(pan)
-
-    expect(process_with_equiptment.equiptment).to eq(pan)
+  before do
+      allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
   end
 
   it 'can begin' do
     allow(character_spy).to receive(:view_skills).and_return([])
-    process_with_equiptment = process.with([ingredient]).in(pan)
+    process_with_equiptment = process.with([ingredient]).in([pan])
 
     dish = process_with_equiptment.begin
 
@@ -47,7 +61,7 @@ describe CookingProcess do
   end
 
   context 'skill' do
-    let(:cooking_process) { process.with([ingredient]).in(pan)}
+    let(:cooking_process) { process.with([ingredient]).in([pan])}
 
     it 'adds cooking skill to user' do
       allow(character_spy).to receive(:view_skills).and_return([])

@@ -8,17 +8,16 @@ class CookingProcess
     @appliance = appliance
     @chef = chef
     @ingredients = []
+    @equiptment = []
   end
 
   def with(ingredients)
-    if available?(ingredients)
-      @ingredients = ingredients
-    end
+    @ingredients = ingredients if available?(:ingredient, ingredients)
     self
   end
 
   def in(equiptment)
-    @equiptment = equiptment
+    @equiptment = equiptment if available?(:equiptment, equiptment)
     self
   end
 
@@ -34,8 +33,8 @@ class CookingProcess
 
   attr_reader :chef
 
-  def available?(ingredients)
-    available_ingredients = chef.available_items(:ingredient)
+  def available?(type, ingredients)
+    available_ingredients = chef.available_items(type)
     ingredients.map { |ingredient| return false if !available_ingredients.include?(ingredient) }
   end
 
