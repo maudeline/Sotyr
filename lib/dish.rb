@@ -11,21 +11,25 @@ class Dish
 
   def initialize(appliance, ingredients, equiptment, skill_level)
     @ingredients = ingredients
+    @equiptment = equiptment
   end
 
   def quality
-    calculate_ingredient_quality
+    ingredient_quality = calculate_quality(ingredients)
+    equiptment_quality = calculate_quality(equiptment)
+    ingredient_quality + equiptment_quality
   end
 
   private
 
-  attr_reader :ingredients
+  attr_reader :ingredients, :equiptment
 
-  def calculate_ingredient_quality
-     sum_quality / ingredients.length
+  def calculate_quality(items)
+    return 0 if items.empty?
+    sum_quality(items) / items.length
   end
 
-  def sum_quality
-    ingredients.inject(0) { |acc, ingredient| acc + QUALITY[ingredient.quality] }
+  def sum_quality(items)
+    items.inject(0) { |acc, item| acc + QUALITY[item.quality] }
   end
 end
