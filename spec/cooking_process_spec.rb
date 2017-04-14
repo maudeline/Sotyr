@@ -87,4 +87,5 @@ describe CookingProcess do
       expect(character_spy).to have_received(:increase_skill)
     end
   end
+
 end

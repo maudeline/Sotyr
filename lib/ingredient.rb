@@ -1,8 +1,9 @@
 class Ingredient
-  attr_reader :name, :type
+  attr_reader :name, :type, :quality
 
-  def initialize(name)
+  def initialize(name, quality)
     @name = name
+    @quality = quality
     @type = :ingredient
   end
 end

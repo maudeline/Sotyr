@@ -25,8 +25,9 @@ class CookingProcess
     if new_chef?
       chef.add_new_skill(cooking: CookingSkill.new)
     end
-    chef.increase_skill(:cooking, 1)
-    Dish.new
+    dish = Dish.new(appliance, ingredients, equiptment, chef.skill_level(:cooking))
+    chef.increase_skill(:cooking, dish)
+    dish
   end
 
   private

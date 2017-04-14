@@ -7,7 +7,7 @@ describe 'Cooking' do
   it 'main character can cook a dish from ingredients' do
     character = MainCharacter.new
     fire = Fire.new
-    egg = Ingredient.new(:egg)
+    egg = Ingredient.new(:egg, :perfect)
     pan = Pan.new
 
     character.pick_up(egg)
@@ -22,7 +22,7 @@ describe 'Cooking' do
   it 'skill level increases when cooking is done' do
     character = MainCharacter.new
     fire = Fire.new
-    egg = Ingredient.new(:egg)
+    egg = Ingredient.new(:egg, :perfect)
     pan = Pan.new
 
     character.pick_up(egg)

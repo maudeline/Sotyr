@@ -2,11 +2,11 @@ class CookingSkill
 
   attr_reader :level
 
-  def initialize
-    @level = 0
+  def initialize(level = 0)
+    @level = level
   end
 
-  def increase(amount)
-    @level += amount
+  def increase(dish)
+    @level += 1
   end
 end
