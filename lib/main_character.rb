@@ -16,7 +16,7 @@ class MainCharacter
   end
 
   def skill_level(skill)
-    skills.fetch(skill)
+    skills.fetch(skill).level
   end
 
   def view_skills
@@ -25,6 +25,10 @@ class MainCharacter
 
   def add_new_skill(skill)
     skills.merge!(skill)
+  end
+
+  def increase_skill(skill, amount)
+    skills.fetch(skill).increase(amount)
   end
 
   private

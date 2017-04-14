@@ -26,7 +26,7 @@ describe MainCharacter do
   end
 
   context 'skills' do
-    let(:cooking_skill) { instance_double(CookingSkill) }
+    let(:cooking_skill) { instance_spy(CookingSkill) }
 
     it 'has no skills initially' do
       expect(character.view_skills).to be_empty
@@ -36,6 +36,14 @@ describe MainCharacter do
       character.add_new_skill(cooking: cooking_skill)
 
       expect(character.view_skills.first).to be(:cooking)
+    end
+
+    it 'can increase a skill' do
+      character.add_new_skill(cooking: cooking_skill)
+
+      character.increase_skill(:cooking, 1)
+
+      expect(cooking_skill).to have_received(:increase).with(1)
     end
   end
 end

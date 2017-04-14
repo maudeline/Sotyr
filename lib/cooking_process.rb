@@ -23,6 +23,7 @@ class CookingProcess
     if new_chef?
       chef.add_new_skill(cooking: CookingSkill.new)
     end
+    chef.increase_skill(:cooking, 1)
     Dish.new
   end
 

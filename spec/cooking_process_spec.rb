@@ -47,5 +47,13 @@ describe CookingProcess do
 
       expect(character_spy).not_to have_received(:add_new_skill)
     end
+
+    it 'increases cooking skill' do
+      allow(character_spy).to receive(:view_skills).and_return([:cooking])
+
+      cooking_process.begin
+
+      expect(character_spy).to have_received(:increase_skill)
+    end
   end
 end
