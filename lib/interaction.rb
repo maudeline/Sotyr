@@ -8,7 +8,7 @@ class Interaction
   end
 
   def interact(option)
-    object.interact(option) if available?(option)
+    object.interact(option, character) if available?(option)
   end
 
   private

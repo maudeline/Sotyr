@@ -34,7 +34,7 @@ describe Interaction do
     it 'can select an option' do
       interaction.interact(:option)
 
-      expect(object_spy).to have_received(:interact).with(:option)
+      expect(object_spy).to have_received(:interact).with(:option, character)
     end
 
     it 'cannot select an option if not available' do

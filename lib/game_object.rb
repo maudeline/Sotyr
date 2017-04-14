@@ -8,7 +8,7 @@ class GameObject
     AVAILABLE_OPTIONS.keys
   end
 
-  def interact(option)
+  def interact(option, chef)
     AVAILABLE_OPTIONS.fetch(option)
   end
 end

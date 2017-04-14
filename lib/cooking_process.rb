@@ -1,10 +1,12 @@
 require 'dish'
+require 'cooking_skill'
 
 class CookingProcess
   attr_reader :appliance, :ingredients, :equiptment
 
-  def initialize(appliance)
+  def initialize(appliance, chef)
     @appliance = appliance
+    @chef = chef
   end
 
   def with(ingredients)
@@ -18,6 +20,17 @@ class CookingProcess
   end
 
   def begin
+    if new_chef?
+      chef.add_new_skill(cooking: CookingSkill.new)
+    end
     Dish.new
+  end
+
+  private
+
+  attr_reader :chef
+
+  def new_chef?
+    !chef.view_skills.include?(:cooking)
   end
 end

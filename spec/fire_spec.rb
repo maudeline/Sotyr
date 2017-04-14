@@ -15,9 +15,9 @@ describe Fire do
 
   context 'cooking' do
     it 'begins a new cooking process' do
-      expect(CookingProcess).to receive(:new).with(fire)
+      expect(CookingProcess).to receive(:new).with(fire, character)
 
-      process = fire.interact(:cook)
+      process = fire.interact(:cook, character)
     end
   end
 end

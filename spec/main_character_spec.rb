@@ -1,5 +1,6 @@
 require 'main_character'
 require 'interaction'
+require 'cooking_skill'
 
 describe MainCharacter do
   let(:character) { described_class.new }
@@ -22,5 +23,19 @@ describe MainCharacter do
     expect(Interaction).to receive(:between).with(object, character)
 
     character.interact_with(object)
+  end
+
+  context 'skills' do
+    let(:cooking_skill) { instance_double(CookingSkill) }
+
+    it 'has no skills initially' do
+      expect(character.view_skills).to be_empty
+    end
+
+    it 'can add a skill' do
+      character.add_new_skill(cooking: cooking_skill)
+
+      expect(character.view_skills.first).to be(:cooking)
+    end
   end
 end
