@@ -8,7 +8,8 @@ class Dish
     perfect: 5
   }.freeze
 
-  def initialize(_appliance, ingredients, equiptment, _skill_level)
+  def initialize(appliance, ingredients, equiptment, _skill_level)
+    @appliance = appliance
     @ingredients = ingredients
     @equiptment = equiptment
   end
@@ -16,12 +17,13 @@ class Dish
   def quality
     ingredient_quality = calculate_quality(ingredients)
     equiptment_quality = calculate_quality(equiptment)
-    ingredient_quality + equiptment_quality
+    appliance_quality = QUALITY[appliance.quality]
+    ingredient_quality + equiptment_quality + appliance_quality
   end
 
   private
 
-  attr_reader :ingredients, :equiptment
+  attr_reader :ingredients, :equiptment, :appliance
 
   def calculate_quality(items)
     return 0 if items.empty?
