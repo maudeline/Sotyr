@@ -31,6 +31,10 @@ class MainCharacter
     skills.fetch(skill).increase(amount)
   end
 
+  def available_items(type)
+    items.select { |item| item.type == type }
+  end
+
   private
 
   attr_accessor :skills

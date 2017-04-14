@@ -1,6 +1,7 @@
 require 'main_character'
 require 'interaction'
 require 'cooking_skill'
+require 'ingredient'
 
 describe MainCharacter do
   let(:character) { described_class.new }
@@ -44,6 +45,19 @@ describe MainCharacter do
       character.increase_skill(:cooking, 1)
 
       expect(cooking_skill).to have_received(:increase).with(1)
+    end
+  end
+
+  context 'items' do
+    let(:ingredient) { instance_spy(Ingredient) }
+
+    it 'lists available ingredients' do
+      allow(ingredient).to receive(:type).and_return(:ingredient)
+
+      character.pick_up(ingredient)
+      ingredients = character.available_items(:ingredient)
+
+      expect(ingredients).to include(ingredient)
     end
   end
 end

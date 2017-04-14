@@ -7,10 +7,13 @@ class CookingProcess
   def initialize(appliance, chef)
     @appliance = appliance
     @chef = chef
+    @ingredients = []
   end
 
   def with(ingredients)
-    @ingredients = ingredients
+    if available?(ingredients)
+      @ingredients = ingredients
+    end
     self
   end
 
@@ -30,6 +33,11 @@ class CookingProcess
   private
 
   attr_reader :chef
+
+  def available?(ingredients)
+    available_ingredients = chef.available_items(:ingredient)
+    ingredients.map { |ingredient| return false if !available_ingredients.include?(ingredient) }
+  end
 
   def new_chef?
     !chef.view_skills.include?(:cooking)
