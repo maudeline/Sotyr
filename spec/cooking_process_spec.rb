@@ -29,7 +29,6 @@ describe CookingProcess do
   end
 
   context 'equiptment' do
-
     it 'can add equiptment' do
       allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
 
@@ -48,7 +47,7 @@ describe CookingProcess do
   end
 
   before do
-      allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
+    allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
   end
 
   it 'can begin' do
@@ -61,7 +60,7 @@ describe CookingProcess do
   end
 
   context 'skill' do
-    let(:cooking_process) { process.with([ingredient]).in([pan])}
+    let(:cooking_process) { process.with([ingredient]).in([pan]) }
 
     it 'adds cooking skill to user' do
       allow(character_spy).to receive(:view_skills).and_return([])
@@ -87,5 +86,4 @@ describe CookingProcess do
       expect(character_spy).to have_received(:increase_skill)
     end
   end
-
 end

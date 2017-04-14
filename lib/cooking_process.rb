@@ -22,9 +22,7 @@ class CookingProcess
   end
 
   def begin
-    if new_chef?
-      chef.add_new_skill(cooking: CookingSkill.new)
-    end
+    chef.add_new_skill(cooking: CookingSkill.new) if new_chef?
     dish = Dish.new(appliance, ingredients, equiptment, chef.skill_level(:cooking))
     chef.increase_skill(:cooking, dish)
     dish
@@ -36,7 +34,7 @@ class CookingProcess
 
   def available?(type, ingredients)
     available_ingredients = chef.available_items(type)
-    ingredients.map { |ingredient| return false if !available_ingredients.include?(ingredient) }
+    ingredients.map { |ingredient| return false unless available_ingredients.include?(ingredient) }
   end
 
   def new_chef?

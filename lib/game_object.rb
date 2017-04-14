@@ -1,5 +1,4 @@
 class GameObject
-
   AVAILABLE_OPTIONS = {
     option: ''
   }.freeze
@@ -8,7 +7,7 @@ class GameObject
     AVAILABLE_OPTIONS.keys
   end
 
-  def interact(option, chef)
+  def interact(option, _chef)
     AVAILABLE_OPTIONS.fetch(option)
   end
 end

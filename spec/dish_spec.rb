@@ -4,14 +4,12 @@ require 'appliance'
 require 'equiptment'
 
 describe Dish do
-
-    let(:ingredient) { instance_double(Ingredient) }
-    let(:appliance) { instance_double(Appliance) }
-    let(:equiptment) { instance_double(Equiptment) }
-    let(:skill_level) { 0 }
+  let(:ingredient) { instance_double(Ingredient) }
+  let(:appliance) { instance_double(Appliance) }
+  let(:equiptment) { instance_double(Equiptment) }
+  let(:skill_level) { 0 }
 
   context 'ingredients' do
-
     let(:dish) { Dish.new(appliance, [ingredient], [], skill_level) }
 
     it 'bad quality ingredients do not add to quality' do
@@ -52,7 +50,6 @@ describe Dish do
   end
 
   context 'equiptment' do
-
     let(:dish) { Dish.new(appliance, [], [equiptment], skill_level) }
 
     it 'bad quality equiptments do not add to quality' do

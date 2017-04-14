@@ -1,5 +1,4 @@
 class Pan
-
   attr_reader :type
 
   def initialize

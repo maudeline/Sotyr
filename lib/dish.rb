@@ -1,5 +1,4 @@
 class Dish
-
   QUALITY = {
     bad: 0,
     poor: 1,
@@ -7,9 +6,9 @@ class Dish
     good: 3,
     excellent: 4,
     perfect: 5
-  }
+  }.freeze
 
-  def initialize(appliance, ingredients, equiptment, skill_level)
+  def initialize(_appliance, ingredients, equiptment, _skill_level)
     @ingredients = ingredients
     @equiptment = equiptment
   end
