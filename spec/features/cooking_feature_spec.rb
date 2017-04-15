@@ -1,14 +1,14 @@
 require 'main_character'
 require 'fire'
 require 'ingredient'
-require 'pan'
+require 'equiptment'
 
 describe 'Cooking' do
   it 'main character can cook a dish from ingredients' do
     character = MainCharacter.new
     fire = Fire.new
     egg = Ingredient.new(:egg, :perfect)
-    pan = Pan.new
+    pan = Equiptment.new(:pan, :perfect)
 
     character.pick_up(egg)
     character.pick_up(pan)
@@ -23,7 +23,7 @@ describe 'Cooking' do
     character = MainCharacter.new
     fire = Fire.new
     egg = Ingredient.new(:egg, :perfect)
-    pan = Pan.new
+    pan = Equiptment.new(:pan, :perfect)
 
     character.pick_up(egg)
     character.pick_up(pan)

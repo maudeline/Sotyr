@@ -1,7 +1,9 @@
 class Equiptment
-  attr_reader :quality
+  attr_reader :name, :quality, :type
 
-  def initialize(quality)
+  def initialize(name, quality)
+    @name = name
     @quality = quality
+    @type = :equiptment
   end
 end

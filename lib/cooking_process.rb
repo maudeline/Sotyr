@@ -22,6 +22,8 @@ class CookingProcess
   end
 
   def begin
+    cookbook = chef.cookbook
+    cookbook.recipe_exists?(appliance, ingredients, equiptment)
     chef.add_new_skill(cooking: CookingSkill.new) if new_chef?
     dish = Dish.new(appliance, ingredients, equiptment, chef.skill_level(:cooking))
     chef.increase_skill(:cooking, dish)

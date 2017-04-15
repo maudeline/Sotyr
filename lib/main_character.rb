@@ -1,10 +1,13 @@
+require 'cookbook'
+
 class MainCharacter
-  attr_reader :name, :items
+  attr_reader :name, :items, :cookbook
 
   def initialize
     @name = 'pan'
     @items = []
     @skills = {}
+    @cookbook = Cookbook.new
   end
 
   def pick_up(item)
