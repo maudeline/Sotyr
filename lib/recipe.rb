@@ -1,5 +1,4 @@
 class Recipe
-
   attr_reader :name, :ingredients, :cooking_method
 
   def initialize(name, ingredients, cooking_method)

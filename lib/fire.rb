@@ -11,7 +11,7 @@ class Fire < GameObject
     pot: :boil,
     griddle: :grill,
     skewer: :roast
-  }
+  }.freeze
 
   def available_actions_for(_character)
     AVAILABLE_OPTIONS.keys

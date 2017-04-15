@@ -5,6 +5,5 @@ class Appliance
     @quality = quality
   end
 
-  def cooking_methods
-  end
+  def cooking_methods; end
 end

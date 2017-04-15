@@ -10,7 +10,6 @@ describe Dish do
   let(:skill_level) { 0 }
 
   context 'ingredients' do
-
     before do
       allow(appliance).to receive(:quality).and_return(:bad)
     end
