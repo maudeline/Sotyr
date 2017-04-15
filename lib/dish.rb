@@ -14,16 +14,18 @@ class Dish
     @equiptment = equiptment
   end
 
-  def quality
+  def quality(known_recipe, made_count)
+    quality = 10
     ingredient_quality = calculate_quality(ingredients)
     equiptment_quality = calculate_quality(equiptment)
     appliance_quality = QUALITY[appliance.quality]
-    ingredient_quality + equiptment_quality + appliance_quality
+    ingredient_quality + equiptment_quality + appliance_quality + quality
   end
 
   private
 
   attr_reader :ingredients, :equiptment, :appliance
+  attr_writer :quality
 
   def calculate_quality(items)
     return 0 if items.empty?

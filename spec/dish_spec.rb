@@ -9,6 +9,18 @@ describe Dish do
   let(:equiptment) { instance_double(Equiptment) }
   let(:skill_level) { 0 }
 
+  context 'recipe' do
+    let(:dish) { Dish.new(appliance, [], [], skill_level) }
+
+    before do
+      allow(appliance).to receive(:quality).and_return(:bad)
+    end
+
+    it 'has a higher quality if recipe exists' do
+      expect(dish.quality(true, 0)).to eq 10
+    end
+  end
+
   context 'ingredients' do
     before do
       allow(appliance).to receive(:quality).and_return(:bad)
@@ -19,37 +31,37 @@ describe Dish do
     it 'bad quality ingredients do not add to quality' do
       allow(ingredient).to receive(:quality).and_return(:bad)
 
-      expect(dish.quality).to eq 0
+      expect(dish.quality(true, 0)).to eq 10
     end
 
     it 'poor quality ingredients add one to quality' do
       allow(ingredient).to receive(:quality).and_return(:poor)
 
-      expect(dish.quality).to eq 1
+      expect(dish.quality(true, 0)).to eq 11
     end
 
     it 'normal quality ingredients add two to quality' do
       allow(ingredient).to receive(:quality).and_return(:normal)
 
-      expect(dish.quality).to eq 2
+      expect(dish.quality(true, 0)).to eq 12
     end
 
     it 'good quality ingredients add three to quality' do
       allow(ingredient).to receive(:quality).and_return(:good)
 
-      expect(dish.quality).to eq 3
+      expect(dish.quality(true, 0)).to eq 13
     end
 
     it 'excellent quality ingredients create a better dish' do
       allow(ingredient).to receive(:quality).and_return(:excellent)
 
-      expect(dish.quality).to eq 4
+      expect(dish.quality(true, 0)).to eq 14
     end
 
     it 'perfect quality ingredients create a better dish' do
       allow(ingredient).to receive(:quality).and_return(:perfect)
 
-      expect(dish.quality).to eq 5
+      expect(dish.quality(true, 0)).to eq 15
     end
   end
 
@@ -63,37 +75,37 @@ describe Dish do
     it 'bad quality equiptments do not add to quality' do
       allow(equiptment).to receive(:quality).and_return(:bad)
 
-      expect(dish.quality).to eq 0
+      expect(dish.quality(true, 0)).to eq 10
     end
 
     it 'poor quality equiptments add one to quality' do
       allow(equiptment).to receive(:quality).and_return(:poor)
 
-      expect(dish.quality).to eq 1
+      expect(dish.quality(true, 0)).to eq 11
     end
 
     it 'normal quality equiptments add two to quality' do
       allow(equiptment).to receive(:quality).and_return(:normal)
 
-      expect(dish.quality).to eq 2
+      expect(dish.quality(true, 0)).to eq 12
     end
 
     it 'good quality equiptments add three to quality' do
       allow(equiptment).to receive(:quality).and_return(:good)
 
-      expect(dish.quality).to eq 3
+      expect(dish.quality(true, 0)).to eq 13
     end
 
     it 'excellent quality equiptments create a better dish' do
       allow(equiptment).to receive(:quality).and_return(:excellent)
 
-      expect(dish.quality).to eq 4
+      expect(dish.quality(true, 0)).to eq 14
     end
 
     it 'perfect quality equiptments create a better dish' do
       allow(equiptment).to receive(:quality).and_return(:perfect)
 
-      expect(dish.quality).to eq 5
+      expect(dish.quality(true, 0)).to eq 15
     end
   end
 
@@ -103,37 +115,38 @@ describe Dish do
     it 'bad quality appliances do not add to quality' do
       allow(appliance).to receive(:quality).and_return(:bad)
 
-      expect(dish.quality).to eq 0
+      expect(dish.quality(true, 0)).to eq 10
     end
 
     it 'poor quality appliances add one to quality' do
       allow(appliance).to receive(:quality).and_return(:poor)
 
-      expect(dish.quality).to eq 1
+      expect(dish.quality(true, 0)).to eq 11
     end
 
     it 'normal quality appliances add two to quality' do
       allow(appliance).to receive(:quality).and_return(:normal)
 
-      expect(dish.quality).to eq 2
+      expect(dish.quality(true, 0)).to eq 12
     end
 
     it 'good quality appliances add three to quality' do
       allow(appliance).to receive(:quality).and_return(:good)
 
-      expect(dish.quality).to eq 3
+      expect(dish.quality(true, 0)).to eq 13
     end
 
     it 'excellent quality appliances create a better dish' do
       allow(appliance).to receive(:quality).and_return(:excellent)
 
-      expect(dish.quality).to eq 4
+      expect(dish.quality(true, 0)).to eq 14
     end
 
     it 'perfect quality appliances create a better dish' do
       allow(appliance).to receive(:quality).and_return(:perfect)
 
-      expect(dish.quality).to eq 5
+      expect(dish.quality(true, 0)).to eq 15
     end
   end
+
 end

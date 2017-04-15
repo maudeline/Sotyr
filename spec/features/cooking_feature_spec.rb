@@ -6,7 +6,7 @@ require 'equiptment'
 describe 'Cooking' do
   it 'main character can cook a dish from ingredients' do
     character = MainCharacter.new
-    fire = Fire.new
+    fire = Fire.new(:perfect)
     egg = Ingredient.new(:egg, :perfect)
     pan = Equiptment.new(:pan, :perfect)
 
@@ -21,7 +21,7 @@ describe 'Cooking' do
 
   it 'skill level increases when cooking is done' do
     character = MainCharacter.new
-    fire = Fire.new
+    fire = Fire.new(:perfect)
     egg = Ingredient.new(:egg, :perfect)
     pan = Equiptment.new(:pan, :perfect)
 
