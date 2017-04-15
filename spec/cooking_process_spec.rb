@@ -77,46 +77,4 @@ describe CookingProcess do
       expect(character_spy).to have_received(:increase_skill)
     end
   end
-
-  context 'recipes' do
-    let(:cooking_process) { process.with([ingredient]).in([pan]) }
-    let(:dish) { instance_spy(Dish) }
-
-    before do
-      allow(Dish).to receive(:new).and_return(dish)
-      allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
-    end
-
-    it 'checks if recipe exists' do
-      allow(ingredient).to receive(:name).and_return(:egg)
-
-      cooking_process.begin
-
-      expect(cookbook_spy).to have_received(:recipe_exists?).with(appliance, [ingredient], [pan])
-    end
-
-    it 'increases dish quality if recipe exists' do
-      allow(cookbook_spy).to receive(:recipe_exists?).and_return(true)
-
-      cooking_process.begin
-
-      expect(dish).to have_received(:quality).with(true, 0)
-    end
-
-    it 'decreases dish quality if dish does not exists' do
-      allow(cookbook_spy).to receive(:recipe_exists?).and_return(false)
-
-      cooking_process.begin
-
-      expect(dish).to have_received(:quality).with(false, 0)
-    end
-
-    it 'calculates quality with make count' do
-      allow(cookbook_spy).to receive(:dish_count).and_return(1)
-
-      cooking_process.begin
-
-      expect(dish).to have_received(:quality).with(false, 1)
-    end
-  end
 end

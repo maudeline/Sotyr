@@ -4,7 +4,8 @@ require 'cooking_skill'
 require 'ingredient'
 
 describe MainCharacter do
-  let(:character) { described_class.new }
+  let(:cookbook) { instance_double(Cookbook) }
+  let(:character) { described_class.new(cookbook) }
 
   it 'has a name' do
     expect(character.name).to eq('pan')

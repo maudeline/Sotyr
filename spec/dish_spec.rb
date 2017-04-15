@@ -8,9 +8,10 @@ describe Dish do
   let(:appliance) { instance_double(Appliance) }
   let(:equiptment) { instance_double(Equiptment) }
   let(:skill_level) { 0 }
+  let(:times_made) { 0 }
 
   context 'recipe' do
-    let(:dish) { Dish.new(appliance, [], [], skill_level) }
+    let(:dish) { Dish.new(appliance, [], [], skill_level, times_made, :bad) }
 
     before do
       allow(appliance).to receive(:quality).and_return(:bad)
@@ -26,7 +27,7 @@ describe Dish do
       allow(appliance).to receive(:quality).and_return(:bad)
     end
 
-    let(:dish) { Dish.new(appliance, [ingredient], [], skill_level) }
+    let(:dish) { Dish.new(appliance, [ingredient], [], skill_level, times_made, :bad) }
 
     it 'bad quality ingredients do not add to quality' do
       allow(ingredient).to receive(:quality).and_return(:bad)
@@ -66,7 +67,7 @@ describe Dish do
   end
 
   context 'equiptment' do
-    let(:dish) { Dish.new(appliance, [], [equiptment], skill_level) }
+    let(:dish) { Dish.new(appliance, [], [equiptment], skill_level, times_made, :bad) }
 
     before do
       allow(appliance).to receive(:quality).and_return(:bad)
@@ -110,7 +111,7 @@ describe Dish do
   end
 
   context 'appliance' do
-    let(:dish) { Dish.new(appliance, [], [], skill_level) }
+    let(:dish) { Dish.new(appliance, [], [], skill_level, times_made, :bad) }
 
     it 'bad quality appliances do not add to quality' do
       allow(appliance).to receive(:quality).and_return(:bad)
@@ -148,5 +149,4 @@ describe Dish do
       expect(dish.quality(true, 0)).to eq 15
     end
   end
-
 end

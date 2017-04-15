@@ -8,13 +8,16 @@ class Dish
     perfect: 5
   }.freeze
 
-  def initialize(appliance, ingredients, equiptment, _skill_level)
+  def initialize(appliance, ingredients, equiptment, skill_level, times_made, recipe_quality)
     @appliance = appliance
     @ingredients = ingredients
     @equiptment = equiptment
+    @skill_level = skill_level
+    @times_made = times_made
+    @recipe_quality = recipe_quality
   end
 
-  def quality(known_recipe, made_count)
+  def quality(_known_recipe, _made_count)
     quality = 10
     ingredient_quality = calculate_quality(ingredients)
     equiptment_quality = calculate_quality(equiptment)

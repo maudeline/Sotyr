@@ -2,14 +2,18 @@ require 'main_character'
 require 'fire'
 require 'ingredient'
 require 'equiptment'
+require 'recipe'
+require 'cookbook'
 
 describe 'Cooking' do
-  it 'main character can cook a dish from ingredients' do
-    character = MainCharacter.new
-    fire = Fire.new(:perfect)
-    egg = Ingredient.new(:egg, :perfect)
-    pan = Equiptment.new(:pan, :perfect)
+  let(:fire) { Fire.new(:perfect) }
+  let(:egg) { Ingredient.new(:egg, :perfect) }
+  let(:pan) { Equiptment.new(:pan, :perfect) }
+  let(:recipe) { Recipe.new('fried egg', [egg], :fry, 0, :good) }
+  let(:cookbook) { Cookbook.new([recipe]) }
+  let(:character) { MainCharacter.new(cookbook) }
 
+  it 'main character can cook a dish from ingredients' do
     character.pick_up(egg)
     character.pick_up(pan)
     interaction = character.interact_with(fire)
@@ -20,11 +24,6 @@ describe 'Cooking' do
   end
 
   it 'skill level increases when cooking is done' do
-    character = MainCharacter.new
-    fire = Fire.new(:perfect)
-    egg = Ingredient.new(:egg, :perfect)
-    pan = Equiptment.new(:pan, :perfect)
-
     character.pick_up(egg)
     character.pick_up(pan)
     interaction = character.interact_with(fire)
