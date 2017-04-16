@@ -1,4 +1,3 @@
-require 'game_object'
 require 'cooking_process'
 
 class Fire

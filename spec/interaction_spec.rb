@@ -1,8 +1,7 @@
 require 'interaction'
-require 'game_object'
 
 describe Interaction do
-  let(:object_spy) { instance_spy(GameObject) }
+  let(:object_spy) { instance_spy(Fire) }
   let(:character) { double(:character) }
 
   it 'can be created with an object and character' do
