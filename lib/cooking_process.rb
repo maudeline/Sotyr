@@ -1,4 +1,3 @@
-require 'dish'
 require 'cooking_skill'
 
 class CookingProcess

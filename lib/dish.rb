@@ -14,8 +14,8 @@ class Dish
     78  => :good,
     53  => :normal,
     26  => :poor,
-    0  => :bad
-  }
+    0 => :bad
+  }.freeze
 
   def initialize(appliance, ingredients, equiptment, skill_level, times_made, recipe_quality)
     @appliance = appliance

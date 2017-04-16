@@ -7,7 +7,7 @@ require 'recipe'
 describe Cookbook do
   let(:appliance) { instance_double(Fire, cooking_method: :fry) }
   let(:equiptment) { instance_double(Equiptment, name: :pan) }
-  let(:recipe) { instance_spy(Recipe, ingredients: [:egg], cooking_method: :fry) }
+  let(:recipe) { instance_spy(Recipe, ingredients: [:egg], cooking_method: :fry, name: 'fried egg') }
   let(:cookbook) { described_class.new([recipe]) }
 
   it 'creates the dish if recipe is known' do
@@ -24,5 +24,13 @@ describe Cookbook do
     dish = cookbook.create_dish(appliance, [ingredient], [equiptment], 0)
 
     expect(dish).not_to be nil
+  end
+
+  it 'can view all known recipes' do
+    ingredient = instance_double(Ingredient, name: :egg)
+
+    dish = cookbook.create_dish(appliance, [ingredient], [equiptment], 0)
+
+    expect(cookbook.view_recipes).to include(recipe)
   end
 end
