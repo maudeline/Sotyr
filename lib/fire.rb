@@ -1,7 +1,9 @@
 require 'game_object'
 require 'cooking_process'
 
-class Fire < GameObject
+class Fire
+  attr_reader :quality
+
   AVAILABLE_OPTIONS = {
     cook: ->(fire, chef) { CookingProcess.new(fire, chef) }
   }.freeze
@@ -12,6 +14,10 @@ class Fire < GameObject
     griddle: :grill,
     skewer: :roast
   }.freeze
+
+  def initialize(quality)
+    @quality = quality
+  end
 
   def available_actions_for(_character)
     AVAILABLE_OPTIONS.keys

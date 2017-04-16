@@ -1,44 +1,33 @@
 require 'recipe'
 
 class Cookbook
-  RECIPES = {
-    fried_egg: Recipe.new('fried egg', [:egg], :fry)
-  }.freeze
-
-  def initialize
+  def initialize(recipes)
     @known_recipes = {}
-    @times_made = {}
+    @recipes = recipes
   end
 
-  def recipe_exists?(appliance, ingredients, equiptment)
-    RECIPES.any? { |_, recipe| matches?(recipe, ingredients, appliance, equiptment) }
-  end
-
-  def recipe_made(appliance, ingredients, equiptment)
-    recipe = RECIPES.select { |name, recipe| name if matches?(recipe, ingredients, appliance, equiptment) }
-    known_recipes.merge!(recipe)
-    count_times_made(recipe.keys.first)
-  end
-
-  def recipes
-    known_recipes.keys
-  end
-
-  def dish_count(recipe_name)
-    times_made[recipe_name]
+  def create_dish(appliance, ingredients, equiptment, skill_level)
+    recipe = get_recipe(appliance, ingredients, equiptment)
+    recipe.make(appliance, ingredients, equiptment, skill_level)
   end
 
   private
 
-  attr_accessor :known_recipes, :times_made
+  attr_accessor :recipes, :known_recipes
 
-  def count_times_made(recipe_name)
-    current_count = current_count(recipe_name)
-    times_made[recipe_name] = current_count += 1
+  def get_recipe(appliance, ingredients, equiptment)
+    recipe = recipes.find { |recipe| matches?(recipe, ingredients, appliance, equiptment) }
+    exists?(recipe) ? recipe : create_recipe(appliance, ingredients, equiptment)
   end
 
-  def current_count(recipe_name)
-    times_made.key?(recipe_name) ? times_made[recipe_name] : 0
+  def create_recipe(appliance, ingredients, equiptment)
+    recipe = Recipe.new('unknown', ingredients, appliance.cooking_method(equiptment.first), 0, :bad)
+    recipes << recipe
+    recipe
+  end
+
+  def exists?(recipe)
+    recipe != nil
   end
 
   def matches?(recipe, ingredients, appliance, equiptment)

@@ -5,9 +5,9 @@ require 'equiptment'
 require 'cookbook'
 
 describe CookingProcess do
-  let(:appliance) { double(:appliance) }
-  let(:ingredient) { instance_double(Ingredient) }
-  let(:pan) { instance_double(Equiptment) }
+  let(:appliance) { double(:appliance, quality: :good) }
+  let(:ingredient) { instance_double(Ingredient, quality: :good) }
+  let(:pan) { instance_double(Equiptment, quality: :good) }
   let(:cookbook_spy) { instance_spy(Cookbook) }
   let(:character_spy) { instance_spy(MainCharacter, cookbook: cookbook_spy, view_skills: []) }
   let(:process) { described_class.new(appliance, character_spy) }
@@ -48,20 +48,12 @@ describe CookingProcess do
     end
   end
 
-  before do
-    allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
-  end
-
-  it 'can begin' do
-    process_with_equiptment = process.with([ingredient]).in([pan])
-
-    dish = process_with_equiptment.begin
-
-    expect(dish).to_not be nil
-  end
-
   context 'skill' do
     let(:cooking_process) { process.with([ingredient]).in([pan]) }
+
+    before do
+      allow(character_spy).to receive(:available_items).and_return([ingredient, pan])
+    end
 
     it 'adds cooking skill to user' do
       cooking_process.begin
@@ -83,18 +75,6 @@ describe CookingProcess do
       cooking_process.begin
 
       expect(character_spy).to have_received(:increase_skill)
-    end
-  end
-
-  context 'recipes' do
-    let(:cooking_process) { process.with([ingredient]).in([pan]) }
-
-    it 'checks if recipe exists' do
-      allow(ingredient).to receive(:name).and_return(:egg)
-
-      cooking_process.begin
-
-      expect(cookbook_spy).to have_received(:recipe_exists?).with(appliance, [ingredient], [pan])
     end
   end
 end

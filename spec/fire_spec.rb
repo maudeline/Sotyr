@@ -2,7 +2,7 @@ require 'fire'
 require 'main_character'
 
 describe Fire do
-  let(:fire) { Fire.new }
+  let(:fire) { Fire.new(:perfect) }
   let(:character) { instance_double(MainCharacter) }
 
   context 'available actions' do
