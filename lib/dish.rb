@@ -8,6 +8,15 @@ class Dish
     perfect: 5
   }.freeze
 
+  DISH_QUALITY = {
+    130  => :perfect,
+    104  => :excellent,
+    78  => :good,
+    53  => :normal,
+    26  => :poor,
+    0  => :bad
+  }
+
   def initialize(appliance, ingredients, equiptment, skill_level, times_made, recipe_quality)
     @appliance = appliance
     @ingredients = ingredients
@@ -17,18 +26,20 @@ class Dish
     @recipe_quality = recipe_quality
   end
 
-  def quality(_known_recipe, _made_count)
-    quality = 10
-    ingredient_quality = calculate_quality(ingredients)
-    equiptment_quality = calculate_quality(equiptment)
-    appliance_quality = QUALITY[appliance.quality]
-    ingredient_quality + equiptment_quality + appliance_quality + quality
+  def quality
+    calculated_quality = calculate_dish_quality
+    DISH_QUALITY.each { |score, quality| return quality if calculated_quality >= score }
   end
 
   private
 
-  attr_reader :ingredients, :equiptment, :appliance
-  attr_writer :quality
+  attr_reader :ingredients, :equiptment, :appliance, :recipe_quality, :skill_level, :times_made
+  def calculate_dish_quality
+    ingredient_quality = calculate_quality(ingredients)
+    equiptment_quality = calculate_quality(equiptment)
+    appliance_quality = QUALITY[appliance.quality]
+    ingredient_quality + equiptment_quality + appliance_quality + QUALITY[recipe_quality] + skill_level + times_made
+  end
 
   def calculate_quality(items)
     return 0 if items.empty?
