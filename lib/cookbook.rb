@@ -2,13 +2,16 @@ require 'recipe'
 
 class Cookbook
   def initialize(recipes)
-    @known_recipes = {}
     @recipes = recipes
   end
 
   def create_dish(appliance, ingredients, equiptment, skill_level)
     recipe = get_recipe(appliance, ingredients, equiptment)
     recipe.make(appliance, ingredients, equiptment, skill_level)
+  end
+
+  def view_recipes
+    recipes
   end
 
   private
