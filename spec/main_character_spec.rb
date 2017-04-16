@@ -2,6 +2,7 @@ require 'main_character'
 require 'interaction'
 require 'cooking_skill'
 require 'ingredient'
+require 'location'
 
 describe MainCharacter do
   let(:cookbook) { instance_double(Cookbook) }
@@ -59,6 +60,16 @@ describe MainCharacter do
       ingredients = character.available_items(:ingredient)
 
       expect(ingredients).to include(ingredient)
+    end
+  end
+
+  context 'movement' do
+    let(:location) { instance_spy(Location) }
+
+    it 'can move to a location' do
+      character.move_to(location)
+
+      expect(character.location).to eq(location)
     end
   end
 end

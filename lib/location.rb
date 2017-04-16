@@ -1,8 +1,9 @@
 class Location
 
-  attr_reader :contents
+  attr_reader :name, :contents
 
-  def initialize(contents)
+  def initialize(name, contents)
+    @name = name
     @contents = contents
   end
 end
