@@ -8,6 +8,7 @@ class MainCharacter
     @items = []
     @skills = {}
     @cookbook = cookbook
+    @current_location = nil
   end
 
   def pick_up(item)
@@ -38,7 +39,15 @@ class MainCharacter
     items.select { |item| item.type == type }
   end
 
+  def move_to(location)
+    @current_location= location
+  end
+
+  def location
+    current_location
+  end
+
   private
 
-  attr_accessor :skills
+  attr_accessor :skills, :current_location
 end
